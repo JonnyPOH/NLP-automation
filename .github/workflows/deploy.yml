@@ -36,7 +36,7 @@ jobs:
 
     - name: Test app.py Locally
       run: |
-        python app.py
+        python src/app.py
 
     - name: Build and Deploy with SAM
       env:
