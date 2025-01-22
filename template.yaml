@@ -1,0 +1,26 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: "Lambda function for processing transcripts and summarizing with Amazon Bedrock"
+
+Resources:
+  TranscriptProcessorFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: app.lambda_handler
+      Runtime: python3.9
+      CodeUri: src/
+      Timeout: 60
+      Policies:
+        - AWSLambdaBasicExecutionRole
+        - AmazonS3ReadOnlyAccess
+        - Statement:
+            Effect: Allow
+            Action:
+              - "logs:CreateLogStream"
+              - "logs:PutLogEvents"
+            Resource: "arn:aws:logs:*:*:*"
+      Environment:
+        Variables:
+          BUCKET_NAME: "my-transcript-bucket"
+          LOGGING_ROLE_ARN: "arn:aws:iam::123456789012:role/dlai-amazon-bedrock-logging-role"
+          BEDROCK_MODEL_ID: "amazon.titan-text-express-v1"
