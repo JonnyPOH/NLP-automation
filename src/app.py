@@ -54,7 +54,7 @@ def lambda_handler(event, context):
             Settings={
                 'ShowSpeakerLabels': True,
                 'MaxSpeakerLabels': 2
-            }f
+            }
         )
         print(f"Transcription job started: {response}")
 
