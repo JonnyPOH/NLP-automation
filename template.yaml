@@ -22,5 +22,5 @@ Resources:
       Environment:
         Variables:
           BUCKET_NAME: "my-transcript-bucket"
-          LOGGING_ROLE_ARN: "arn:aws:iam::123456789012:role/dlai-amazon-bedrock-logging-role"
-          BEDROCK_MODEL_ID: "amazon.titan-text-express-v1"
+          LOGGING_ROLE_ARN: "arn:aws:iam::637423214227:role/DLAITestingIAMRoleStack-MyIAMRole-dxN355NlNybH"
+          BEDROCK_MODEL_ID: "amazon.titan-text-lite-v1"
