@@ -7,7 +7,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: app.lambda_handler
-      Runtime: python3.10
+      Runtime: python3.9
       CodeUri: src/
       Timeout: 60
       Policies:
