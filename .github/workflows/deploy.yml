@@ -1,4 +1,4 @@
-name: Deploy Lambda Function 4
+name: Deploy Lambda Function 2
 
 on:
   push:
@@ -20,13 +20,14 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-west-2
 
-    - name: Set up Python
+    - name: Set up Python 3.9
       uses: actions/setup-python@v4
       with:
-        python-version: 3.9.20
+        python-version: 3.9
 
     - name: Install dependencies from requirements.txt
       run: |
+        cd src  # Navigate to the directory with requirements.txt
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
@@ -37,4 +38,4 @@ jobs:
     - name: Build and Deploy with SAM
       run: |
         sam build
-        sam deploy --no-confirm-changeset --stack-name TranscriptProcessorStack --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM
+        sam deploy --no-confirm-changeset --stack-name TranscriptProcessorStack --s3-bucket $BUCKET_NAME --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM
