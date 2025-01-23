@@ -4,7 +4,6 @@ import uuid
 import json
 from helpers.Lambda_Helper import Lambda_Helper
 from helpers.S3_Helper import S3_Helper
-from helpers.Display_Helper import Display_Helper
 from jinja2 import Template
 
 # Environment Variables
@@ -15,7 +14,6 @@ os.environ['LAMBDA_LAYER_VERSION_ARN'] = 'arn:aws:lambda:us-west-2:637423214227:
 # Helper Instances
 lambda_helper = Lambda_Helper()
 s3_helper = S3_Helper()
-display_helper = Display_Helper()
 
 # S3 Bucket Names
 bucket_name_text = os.environ['LEARNER_S3_BUCKETNAME_TEXT']
@@ -147,16 +145,11 @@ lambda_helper.deploy_function(
 lambda_helper.filter_rules_suffix = "json"
 lambda_helper.add_lambda_trigger(bucket_name_text)
 
-display_helper.json_file('demo-transcript.json')
-
 s3_helper.upload_file(bucket_name_text, 'demo-transcript.json')
 
 s3_helper.list_objects(bucket_name_text)
 
 s3_helper.download_object(bucket_name_text, "results.txt")
-
-display_helper.text_file('results.txt')
-
 
 # Lambda Deployment and Trigger Configuration
 lambda_helper.lambda_environ_variables = {'S3BUCKETNAMETEXT': bucket_name_text}
@@ -178,6 +171,3 @@ s3_helper.list_objects(bucket_name_text)
 
 # Download Transcription Result
 s3_helper.download_object(bucket_name_text, 'results.txt')
-
-# Display Transcription Result
-display_helper.text_file('results.txt')
